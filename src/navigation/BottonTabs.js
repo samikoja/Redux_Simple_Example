@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 // import { Icon } from 'react-native-elements';
 import Home from '../screens/Home/home';
 import UserDetials from '../screens/UserDetials/userdetails';
+import UserInfo from '../navigation/UserInfo';
 
 
 export default function BottonTabs() {
@@ -14,8 +15,8 @@ export default function BottonTabs() {
       <Tab.Navigator>
         <Tab.Screen name="Home" component={Home} options = {{tabBarIcon: () => (
           <Ionicons name="pricetags-outline" size={20}/>
-        ),}} />
-        <Tab.Screen name="UserDetails" component={UserDetials} options = {{tabBarIcon: () => (
+        ),  }} />
+        <Tab.Screen name="UserInfo" component={UserInfo} options = {{tabBarIcon: () => (
           <Ionicons name="person-outline" size={20}/>
         ),}} />
       </Tab.Navigator>

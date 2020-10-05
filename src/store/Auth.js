@@ -14,8 +14,10 @@ const initialState = {
   name: '',
   username: '',
   isLogin: false,
-  email: ''
-} 
+  email: '',
+  mobileNumber: '',
+  objectId: ''
+}
 
 const slice = createSlice({
   name: 'auth',
@@ -27,6 +29,8 @@ const slice = createSlice({
       state.isLogin = true;
       state.email = action.payload.email;
       state.name = action.payload.name;
+      state.mobileNumber = action.payload.mobileNumber;
+      state.objectId = action.payload.objectId;
     },
     logout : (state, action) => {
       state.token = '';
@@ -34,6 +38,7 @@ const slice = createSlice({
       state.isLogin = false;
       state.email = '';
       state.name = '';
+      state.mobileNumber = '';
       storeData('token', '');
       storeData('username', '');
       storeData('password', '');

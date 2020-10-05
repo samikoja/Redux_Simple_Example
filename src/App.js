@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import Main from './navigation/Main';
 import reducer from './store/Reducer';
 import Splash from '../src/screens/Login/Splash';
+import Cart from './components/cart/ShoopingCartItems';
 
 
 const App = () => {

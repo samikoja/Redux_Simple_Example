@@ -3,13 +3,12 @@ import { View, Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useSelector, useDispatch } from 'react-redux';
+import Icons from 'react-native-vector-icons/FontAwesome5';
 import BottomTabs from './BottonTabs';
+import HomeNavigation from './HomeNavigation'
 import Login from '../screens/Login/user_login';
-import { login } from '../store/Auth';
 import Signup from '../screens/Signup/signup';
-import Global from '../utils/Global';
-import About from '../screens/about/About';
-
+import ShoppingCartIcon from '../components/cart/ShoppingCartIcon';
 
 export default function Main() {
     const userInfo = useSelector(state => state.entities.auth);
@@ -56,7 +55,9 @@ export default function Main() {
                     <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
                 </>
             ) : (
-                    <Stack.Screen name="Product" component={BottomTabs} />
+                    <Stack.Screen name="Product" component={HomeNavigation} options = {{
+                        headerRight: () => (<ShoppingCartIcon/>)
+                    }} />
                 )}
 
         </Stack.Navigator>

@@ -9,8 +9,8 @@ import Global from '../../utils/Global'
 
 export default function user_login() {
   const navigation = useNavigation();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('test');
+  const [password, setPassword] = useState('test');
   const dispatch = useDispatch();
 
   const handleLogin = async () => {
@@ -29,7 +29,8 @@ export default function user_login() {
         if (result.error) {
           alert(result.error)
         } else {
-          dispatch(login({ token: result.sessionToken, username: result.username, email: result.email, name: result.name }))
+          console.log('Login',result.sessionToken)
+          dispatch(login({ token: result.sessionToken, username: result.username, email: result.email, name: result.name, mobileNumber: result.mobileNumber, objectId: result.objectId }))
           storeData('token', result.sessionToken);
           storeData('username', result.username);
           storeData('password', password);

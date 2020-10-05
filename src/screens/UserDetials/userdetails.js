@@ -1,12 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, Image, ImageBackground, ScrollView, TouchableOpacity, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import ImagePicker from 'react-native-image-picker';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { logout } from '../../store/Auth';
 
-export default function profile({ navigation }) {
+export default function profile() {
+    const navigation = useNavigation();
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.entities.auth);
+    const [image, setImage] = useState('')
+
+
+    // const options = {
+    //     title: 'Select Avatar',
+    //     customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+    //     storageOptions: {
+    //         skipBackup: true,
+    //         path: 'images',
+    //     },
+    // };
+
+
 
     return (
         <>
@@ -22,10 +38,34 @@ export default function profile({ navigation }) {
                 </View>
 
                 <View style={styles.image_view}>
-                    <ImageBackground source={require('../../assets/profile.png')} style={styles.profile_image} >
+                    <ImageBackground  style={styles.profile_image} >
+                        <Image source={image}/>
+                        <TouchableWithoutFeedback onPress={() => {
+                            ImagePicker.showImagePicker( (response) => {
+                                // console.log('Response = ', response);
+
+                                if (response.didCancel) {
+                                  console.log('User cancelled image picker');
+                                } else if (response.error) {
+                                //   console.log('ImagePicker Error: ', response.error);
+                                } else if (response.customButton) {
+                                //   console.log('User tapped custom button: ', response.customButton);
+                                } else {
+                                  const source = { image: image };
+
+                                  // You can also display the image using data:
+                                  // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                                  setImage(
+                                   source
+                                  );
+                                }
+                              });
+                        }}>
                         <View style={styles.icon_view}>
                             <Ionicons name="camera-outline" style={styles.icon_profile} size={25} />
                         </View>
+                        </TouchableWithoutFeedback>
                     </ImageBackground>
                 </View>
                 <View style={styles.name_view}>
@@ -41,7 +81,7 @@ export default function profile({ navigation }) {
                     <Ionicons name="phone-portrait-outline" size={40} style={styles.info_icon}></Ionicons>
                     <View>
                         <Text style={styles.info_text_title}>Mobile Number</Text>
-                        <Text style={styles.info_text_body}>+961-76-705793</Text>
+    <Text style={styles.info_text_body}>+961-{userInfo.mobileNumber}</Text>
                     </View>
                 </View>
 

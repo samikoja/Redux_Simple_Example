@@ -10,6 +10,7 @@ const slice = createSlice({
   reducers: {
     setProducts : (state, action) => {
       state.products = action.payload.products
+      // state.price = action.payload.price
     },
     deleteProduct: (state, action) => {
      state.products =  state.products.filter(product => product.objectId != action.payload.id);
